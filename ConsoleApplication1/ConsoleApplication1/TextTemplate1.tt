@@ -1,0 +1,63 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.IO" #>
+<#  
+string NameClass = "ClassT4";
+string NameSpace = "ConsoleApplication1";
+string folder = "Classes";
+DirectoryInfo directoryTemplate = new FileInfo(Host.TemplateFile).Directory;
+
+writeUsings(NameSpace, folder);
+
+BeginHeader(NameSpace, NameClass);
+
+foreach(FileInfo file in new DirectoryInfo(directoryTemplate.FullName + @"\" + folder).GetFiles())
+{
+	WriteProperty(file.Name.Split('.').GetValue(0).ToString());
+}
+EndNamespace();
+
+#>
+
+<#+ 
+private void writeUsings(string space, string folder)
+{
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using <#= space + "." + folder #>;
+
+<#+ 
+}
+
+private void BeginHeader(string space, string nameClass)
+{
+	
+#>
+namespace <#=  space #>
+{
+	public class <#=  nameClass #>
+	{
+	
+<#+ 
+}
+
+private void EndNamespace()
+{
+#>
+	}
+}
+<#+
+}
+
+private void WriteProperty(string name)
+{
+#>
+	public <#= String.Format("{0} {1}",name, name.ToLower()) #>  {get; set; }
+	
+<#+
+}
+
+#>

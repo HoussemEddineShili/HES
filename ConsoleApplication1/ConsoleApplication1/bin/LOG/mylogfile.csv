@@ -1,0 +1,4 @@
+DateTime;Level;Message
+2016-04-28 10:14:08,268 [10]; WARN; ConsoleApplication1.Program - This is a warn message
+2016-04-28 10:14:08,270 [10]; ERROR; ConsoleApplication1.Program - This is a error message
+2016-04-28 10:14:08,270 [10]; FATAL; ConsoleApplication1.Program - This is a fatal message
